@@ -1,0 +1,29 @@
+{
+  "name": "ga-chat",
+  "version": "1.0.0",
+  "description": "GA Castro Emergency Support Chat with Aurora IA - 24/7 Roofing and Home Repair Emergency Response",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve . -s",
+    "dev": "serve . -s"
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "keywords": [
+    "emergency-chat",
+    "roofing-support",
+    "ga-castro",
+    "aurora-ia",
+    "24-7-support"
+  ],
+  "author": "GA Castro Construction",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benitocabrerar/ga-chat.git"
+  }
+}
