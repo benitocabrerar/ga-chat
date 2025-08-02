@@ -158,23 +158,55 @@
             position: absolute;
             top: 16px;
             right: 16px;
-            background: var(--accent-primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-size: 12px;
-            font-weight: 600;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 6px 12px;
+            font-size: 11px;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 1000;
         }
 
         .language-selector:hover {
-            background: var(--accent-hover);
-            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.98);
+            border-color: var(--accent-primary);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 4px 16px rgba(30, 64, 175, 0.12);
+        }
+
+        .language-selector:active {
+            transform: translateY(-1px) scale(1.01);
+            transition: all 0.1s ease;
+        }
+
+        .language-flag {
+            font-size: 12px;
+            line-height: 1;
+        }
+
+        .language-text {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            letter-spacing: -0.02em;
+            transition: all 0.2s ease;
+        }
+
+        .language-selector:hover .language-text {
+            color: var(--accent-primary);
+        }
+
+        .language-selector:hover .language-flag {
+            transform: scale(1.1);
         }
 
         .emergency-contact {
@@ -465,7 +497,18 @@
                 padding: 4px 8px;
                 font-size: 10px;
                 z-index: 1000;
-                border-radius: 6px;
+                border-radius: 8px;
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+            }
+            
+            .language-flag {
+                font-size: 10px;
+            }
+            
+            .language-text {
+                font-size: 9px;
+                font-weight: 600;
             }
             
             .messages-container {
@@ -730,7 +773,8 @@
         <div class="main-content">
             <!-- Language Selector -->
             <button class="language-selector" onclick="toggleLanguage()" id="language-selector">
-                🇺🇸 English
+                <span class="language-flag">🇺🇸</span>
+                <span class="language-text">EN</span>
             </button>
 
             <!-- Messages -->
@@ -807,7 +851,19 @@
         function toggleLanguage() {
             currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
             const langSelector = document.getElementById('language-selector');
-            langSelector.innerHTML = currentLanguage === 'en' ? '🇺🇸 English' : '🇪🇸 Español';
+            
+            // Update selector content with new structure
+            if (currentLanguage === 'en') {
+                langSelector.innerHTML = `
+                    <span class="language-flag">🇺🇸</span>
+                    <span class="language-text">EN</span>
+                `;
+            } else {
+                langSelector.innerHTML = `
+                    <span class="language-flag">🇪🇸</span>
+                    <span class="language-text">ES</span>
+                `;
+            }
             
             // Update all translatable elements
             document.querySelectorAll('[data-en]').forEach(element => {
